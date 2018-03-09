@@ -1,8 +1,18 @@
 <form action="/user/update/<%= user.id %>" method="POST" class="form-signin">
-	<h2> Editar el usuario</h2>
-	<p> probando el status del commit </p>
+	<h2 class="form-signin-heading"> Editar el usuario</h2>
+
+	<% if(flash && flash.err) { %>
+		<ul class="alert alert-success">
+	<% Object.keys(flash.err).forEach(function(error) { %>
+		<li><%- JSON.stringify( flash.err[error]) %></li>
+	<% }) %>
+	</ul>
+	<% } %>
+
+
 	<input value="<%= user.nombre %>" name="nombre" type="text" class="form-control"/>
 	<input value="<%= user.password %>" name="password" type="password" class="form-control"/>
+	<input value="" name="passwordConfirm" type="password" class="form-control"/>
 	<input type="submit" value="Confirmar" class="btn btn-lg btn-primary btn-block"/>
 	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
 

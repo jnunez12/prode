@@ -43,6 +43,7 @@ module.exports = {
 
 	// get array of users
 	index: function (req, res, next) {
+
 		User.find(function foundUsers (err, users) {
 			if (err) return next(err);
 
@@ -66,6 +67,10 @@ module.exports = {
 	update: function (req, res, next) {
 		User.update(req.param('id'), req.params.all(), function foundUser(err) {
 			if (err) {
+				console.log(res.locals.flash);
+				req.session.flash = {
+					err: err
+				}
 				return res.redirect('/user/edit/' + req.param('id'));
 			}
 
