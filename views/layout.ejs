@@ -41,46 +41,42 @@
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
+     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse"  data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="/"> Inicio </a>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
+      </div>
+        <ul class="nav nav-pills">
             <% if (session.authenticated) { %>
-              <li class="active"> <a href="/user/show/<%= session.User.id %>"><%= session.User.name %> </a> </li>
-              <li><a href="/user">Settings</a></li>
-              <li><a href="#">Placeholder2</a></li>
+              <li class="nav-item"> <a class ="nav-link" href="/user/show/<%= session.User.id %>"><%= session.User.nombre %> </a> </li>
+              <li class="nav-item"><a class ="nav-link" href="/user">Settings</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Placeholder2</a></li>
               <% } %>
           </ul>
-          <div class="navbar-right">
+      
+      <div class="navbar-right">
             <% if(session.authenticated) { %>
-              <a class="btn btn-default navbar-btn navbar-right" href="/session/destroy">Log out</a>
+              <a class="btn btn-outline-success my-2 my-sm-0" href="/session/destroy">Log out</a>
             <% } %>
-          </div>
-          <% if(session.authenticated) { %> 
-          <form class="navbar-form navbar-right" action="/session/create">
+      </div>
+      <% if(!session.authenticated) { %>
+          <form class="form-horizontal form-inline" action="/session/create">
+            
             <div class="form-group">
               <input type="text" placeholder="Nombre de usuario" name="nombre" class="form-control">
             </div>
             <div class="form-group">
+              
               <input type="password" placeholder="Contraseña" name="password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-success">Crear cuenta</button>
+            <button type="submit" class="btn btn-success">Iniciar sesión</button>
             <input type="hidden" name="_csrf" value="<%= _csrf %>" />
           </form>
           <% } %>
-        </div>
       </div>
-    </div>  
+    </nav> 
 
-    
     <%- body %>
 
 
@@ -139,9 +135,9 @@
     <script src="/js/dependencies/jquery-3.3.1.js"></script>
     <script src="/js/dependencies/jquery.validate.js"></script>
     <script src="/js/dependencies/jquery.validate.min.js"></script>
+    <script src="/js/dependencies/bootstrap.js"></script>
     <script src="/js/dependencies/bootstrap.bundle.js"></script>
     <script src="/js/dependencies/bootstrap.bundle.min.js"></script>
-    <script src="/js/dependencies/bootstrap.js"></script>
     <script src="/js/dependencies/bootstrap.min.js"></script>
     <script src="/js/dependencies/customValidate.js"></script>
     <!--SCRIPTS END-->

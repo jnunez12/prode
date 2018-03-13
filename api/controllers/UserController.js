@@ -15,7 +15,7 @@ module.exports = {
 		User.create( req.params.all(), function userCreated (err, user) {
 			// if error entonces
 			if (err) {
-				console.log(res.locals.flash);
+				//console.log(res.locals.flash);
 				req.session.flash = {
 					err: err
 				}
@@ -25,7 +25,10 @@ module.exports = {
 
 			// despues de crear respuesta.return redirije al objeto creado
 			//res.json(user);
-			res.redirect('/user/show/'+user.id);	
+			req.session.authenticated = true;
+			req.session.User = user;
+
+			res.redirect('/user/show/' + user.id); 	
 			//req.session.flash = {};
 		});
 	},
