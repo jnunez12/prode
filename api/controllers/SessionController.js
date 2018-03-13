@@ -50,11 +50,19 @@ module.exports = {
 					res.redirect('/session/new');
 					return;		
 				}
-			
-			req.session.authenticated = true;
-			req.session.User = user;
+				
+				// Log in user
+				req.session.authenticated = true;
+				req.session.User = user;
 
-			res.redirect('/user/show/' + user.id); 
+				// Si es admin va directamente al panel de administracion
+				if(req.session.User.admin) {
+					res.redirect('/user');
+					return;	
+				}		
+				
+				// Si no es admin que se vaya a ver el mismo
+				res.redirect('/user/show/' + user.id); 
 			});
 		});	
 	},

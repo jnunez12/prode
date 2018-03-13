@@ -21,6 +21,11 @@ module.exports = {
   		unique: true
   	},
 
+    admin: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+
   	password: {
   		type: 'string',
   		required: true

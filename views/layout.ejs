@@ -50,6 +50,8 @@
         <ul class="nav nav-pills">
             <% if (session.authenticated) { %>
               <li class="nav-item"> <a class ="nav-link" href="/user/show/<%= session.User.id %>"><%= session.User.nombre %> </a> </li>
+            <% } %>
+            <% if (session.authenticated && session.User.admin) { %>
               <li class="nav-item"><a class ="nav-link" href="/user">Settings</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Placeholder2</a></li>
               <% } %>
