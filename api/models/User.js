@@ -66,6 +66,18 @@ module.exports = {
       values.encryptedPassword = encryptedPassword;
       next();
     });
+  },
+
+  beforeValidate: function(values, next){
+    console.log(values)
+    if (typeof values.admin !== 'undefined'){
+      if (values.admin === 'unchecked') {
+        values.admin = false;
+      }else if (values.admin[1] === 'on') {
+        values.admin = true;
+      }
+    }
+    next();
   }
 };
 

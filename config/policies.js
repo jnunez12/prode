@@ -32,6 +32,9 @@ module.exports.policies = {
     'new': "flash",
     create: "flash",
     show: "userCaseSeeProfile",
+    edit: "userCaseSeeProfile",
+    update: "userCaseSeeProfile",
+    destroy: "userCaseSeeProfile",
     '*': "admin"
   }
 
