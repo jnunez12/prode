@@ -12,7 +12,14 @@ module.exports = {
 	},
 
 	create: function (req, res, next) {
-		User.create( req.params.all(), function userCreated (err, user) {
+
+		var userObj = {
+			nombre: req.param('nombre'),
+			password: req.param('password'),
+			passwordConfirm: req.param('passwordConfirm')
+		}
+
+		User.create( userObj, function userCreated (err, user) {
 			// if error entonces
 			if (err) {
 				//console.log(res.locals.flash);
@@ -29,8 +36,8 @@ module.exports = {
 			req.session.User = user;
 
 			// Change status to online
-			user.online = true;
-			user.save(function(err, user) {
+			user.online = true
+			user.save(function(err) {
 				if (err) return next(err);
 				
 				// After successfully creating the user
@@ -77,8 +84,27 @@ module.exports = {
 	},
 	
 	update: function (req, res, next) {
-		User.update(req.param('id'), req.params.all(), function foundUser(err) {
+
+		if(req.session.User.admin) {
+			var userObj = {
+				nombre: req.param('nombre'),
+				password: req.param('password'),
+				passwordConfirm: req.param('passwordConfirm'),
+				admin: req.param('admin')
+			}
+		} else {
+			var userObj = {
+				nombre: req.param('nombre'),
+				password: req.param('password'),
+				passwordConfirm: req.param('passwordConfirm')
+			}
+		}
+
+		console.log(userObj);
+
+		User.update(req.param('id'), userObj, function foundUser(err) {
 			if (err) {
+				console.log(userObj);
 				console.log(res.locals.flash);
 				req.session.flash = {
 					err: err
