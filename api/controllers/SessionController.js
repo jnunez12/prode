@@ -55,21 +55,56 @@ module.exports = {
 				req.session.authenticated = true;
 				req.session.User = user;
 
-				// Si es admin va directamente al panel de administracion
-				if(req.session.User.admin) {
-					res.redirect('/user');
-					return;	
-				}		
-				
-				// Si no es admin que se vaya a ver el mismo
-				res.redirect('/user/show/' + user.id); 
+				// Change status to online
+				user.online = true;
+				user.save(function(err) {
+					if (err) return next(err);
+
+					// Si es admin va directamente al panel de administracion
+					if(req.session.User.admin) {
+						res.redirect('/user');
+						return;	
+					}		
+					// Si no es admin que se vaya a ver el mismo
+					res.redirect('/user/show/' + user.id); 
+						
+				});
 			});
 		});	
 	},
 
 	destroy: function(req, res, next) {
-		req.session.destroy();
+		
+		User.findOne(req.session.User.id, function foundUser (err, user) {
 
-		res.redirect('/session/new');
+			var userId = req.session.User.id;
+
+			user.online = false;
+			user.save(function(err) {
+				if (err) return next(err);
+
+				// Wipe out the session (log out)
+				req.session.destroy();
+
+				// Redirect the browser to the sign-in screen
+				res.redirect('/session/new');
+						
+			});
+			// The user is "logging out" (e. g. destroying the session) so change the online attribute to false.
+			//user.password = user.password;
+			//user.passwordConfirm = user.password;
+			//User.update(user, {
+			//	online: false
+			//}, function (err) {
+			//	if(err) return next(err);
+				// Wipe out the session (log out)
+				//req.session.destroy();
+
+				// Redirect the browser to the sign-in screen
+				//res.redirect('/session/new');
+			//});
+		});
+
+		
 	}
-}
+};

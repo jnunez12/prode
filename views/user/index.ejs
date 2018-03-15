@@ -9,6 +9,11 @@
 
 		<% _.each(users, function(user) { %>
 		<tr data-id="<%= user.id %>" data-model="user">
+			<% if (user.online) { %>
+				<td><img src="/images/poweron.png"></td>
+		<% } else { %>
+			<td><img src="/images/poweroff.png"></td>
+		<% } %>
 			<td><%= user.id %></td>
 			<td><%= user.nombre %></td>
 			<td><%= user.password %></td>
