@@ -3,9 +3,11 @@
 
 	
 	
-	
+	<label class="text">Nombre: </label>
 	<input value="<%= user.nombre %>" name="nombre" type="text" class="form-control"/>
+	<label class="text">Contraseña: </label>
 	<input value="<%= user.password %>" name="password" type="password" class="form-control"/>
+	<label class="text">Confirmar contraseña: </label>
 	<input value="" name="passwordConfirm" type="password" class="form-control"/>
 
 	<% if (session.authenticated && session.User.admin) { %>

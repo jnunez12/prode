@@ -1,13 +1,16 @@
 <div class="container">
-	<h1> <%= user.nombre %> </h1>
+	<div class="jumbotron">
+		<h1> <%= user.nombre %> </h1>
 
-	<% if (user.admin) { %>
-		<td> <img src="/images/crown.png"></td>
-	<% } else { %>
-		<td> <img src="/images/user.png"></td>
-	<% } %>
-			
-	<h3> <%= user.password %> </h3>
+		<% if (user.admin) { %>
+			<td> <img src="/images/crown.png"></td>
+		<% } else { %>
+			<td> <img src="/images/user.png"></td>
+		<% } %>
+				
+		<h3> <%= user.password %> </h3>
 
-	<a class="btn btn-medium btn-primary" href="/user/edit/<%= user.id %>"> EDITAR </a>
+		<a class="btn btn-medium btn-primary" href="/user/edit/<%= user.id %>"> EDITAR </a>
+	</div>
 </div>
+

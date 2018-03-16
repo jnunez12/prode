@@ -30,8 +30,15 @@ module.exports = {
 				return res.redirect('/user/new');
 			}
 
+			// Si el usuario es creado por un admin entonces no cambio el session.user , quedo logueado como admin
+			if(req.session.authenticated == true) {
+				return res.redirect('/user/show/' + user.id); 
+			}
+
+
 			// despues de crear respuesta.return redirije al objeto creado
 			//res.json(user);
+
 			req.session.authenticated = true;
 			req.session.User = user;
 
