@@ -40,44 +40,47 @@
   </head>
 
   <body>
-
-     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+     <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-dark">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/"> Inicio </a>
+          <a class="navbar-brand btn btn-primary" href="/"> Inicio </a>
         </div>
       </div>
-        <ul class="nav nav-pills">
+      <div class="collapse navbar-collapse">
+        <ul class="nav nav-pills mr-auto mt-2 mt-lg-0">
             <% if (session.authenticated) { %>
-              <li class="nav-item"> Bienvenido <a class ="nav-link" href="/user/show/<%= session.User.id %>">  <%= session.User.nombre %> </a> </li>
+              <li class="nav-item text-primary"> Bienvenido <a class ="nav-link" href="/user/show/<%= session.User.id %>">  <%= session.User.nombre %> </a> </li>
             <% } %>
             <% if (session.authenticated && session.User.admin) { %>
               <li class="nav-item"><a class ="nav-link" href="/user">Administrar usuarios</a></li>
               <% } %>
           </ul>
-      
+      </div>
       <div class="navbar-right">
             <% if(session.authenticated) { %>
               <a class="btn btn-outline-success my-2 my-sm-0" href="/session/destroy">Log out</a>
             <% } %>
       </div>
       <% if(!session.authenticated) { %>
-          <form class="form-horizontal form-inline" action="/session/create">
-            
-            <div class="form-group">
-              <input type="text" placeholder="Nombre de usuario" name="nombre" class="form-control">
+          <form action="/session/create">
+            <div class="form-row align-items-center">
+              <div class="col">
+                <input type="text" placeholder="Usuario" name="nombre" class="form-control">
+              </div>
+              <div class="col">
+                <input type="password" placeholder="Contraseña" name="password" class="form-control">
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-success">Iniciar sesión</button>
+                <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+              </div>
             </div>
-            <div class="form-group">
-              
-              <input type="password" placeholder="Contraseña" name="password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Iniciar sesión</button>
-            <input type="hidden" name="_csrf" value="<%= _csrf %>" />
           </form>
           <% } %>
       </div>
     </nav> 
-
+  </div>
     <%- body %>
 
 
