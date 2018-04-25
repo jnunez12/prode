@@ -11,8 +11,11 @@
  */
 
 module.exports.sockets = {
-
-
+/*
+  afterDisconnect: function(session, socket) {
+    console.log("se desconecto ameo");
+  }
+  */
   /***************************************************************************
   *                                                                          *
   * Node.js (and consequently Sails.js) apps scale horizontally. It's a      *

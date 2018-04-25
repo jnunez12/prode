@@ -31,10 +31,29 @@ module.exports.policies = {
   user: {
     'new': "flash",
     create: "flash",
+    subscribe: 'flash',
     show: "userCaseSeeProfile",
     edit: "userCaseSeeProfile",
     update: "userCaseSeeProfile",
     destroy: "userCaseSeeProfile",
+    '*': "admin"
+  },
+
+  equipo: {
+    'new': "flash",
+    create: 'flash',
+    '*': "admin"
+  },
+
+  grupo: {
+    '*': "admin"
+  },
+
+  partido: {
+    '*': "admin"
+  },
+
+  jugador: {
     '*': "admin"
   }
 

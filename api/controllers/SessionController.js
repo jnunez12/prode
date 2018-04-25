@@ -60,6 +60,14 @@ module.exports = {
 				user.save(function(err) {
 					if (err) return next(err);
 
+					// Inform other sockets that this user is now logged in
+					
+					User.publishUpdate(user.id, {
+						loggedIn: true,
+						id: user.id
+					});
+					
+					
 					// Si es admin va directamente al panel de administracion
 					if(req.session.User.admin) {
 						res.redirect('/user');

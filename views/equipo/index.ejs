@@ -1,0 +1,38 @@
+<div class="container">
+	<h3> Equipos </h3>
+	<table class="table">
+		<tr>
+			<th></th>
+			<th>ID</th>
+			<th>Nombre corto</th>
+			<th>Nombre largo</th>
+			<th>Grupo</th>
+			<th>Posicion inicial</th>
+		</tr>
+
+		<% _.each(equipos, function(equipo) { %>
+		<tr data-id="<%= equipo.id %>" data-model="equipo">
+			<td><%= equipo.id %></td>
+			<td><%= equipo.nombreCorto %></td>
+			<td><%= equipo.nombreLargo %></td>
+			<td><%= equipo.grupo %></td>
+			<td><%= equipo.posicInicial %></td>
+			
+			<td><a href="/equipo/show/<%= equipo.id%>" class="btn btn-sm btn-primary">Mostrar</a></td>
+			<td><a href="/equipo/edit/<%= equipo.id%>" class="btn btn-sm btn-warning">Editar</a></td>
+
+			<td>
+				<form action="/equipo/destroy/<%= equipo.id %>" method="POST">
+					<input type="hidden" name="_method" value="delete"/>
+					<input type="submit" class="btn btn-sm btn-danger" value="Eliminar"/>
+					<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+				</form>
+			</td>
+
+		</tr>
+	<% }) %>
+		<tr> 
+			<td><a href="/equipo/new" class="btn btn-sm btn-secondary"> Nuevo Equipo</a></td>
+		</tr>
+	</table>
+</div>

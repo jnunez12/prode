@@ -1,0 +1,30 @@
+<form action="/equipo/create" method="POST" class="form-signin">
+	<h2 class="form-signin-heading"> Crear Equipo </h2>
+
+	<% if(flash && flash.err) { %>
+		<ul class="alert alert-success">
+	<% Object.keys(flash.err).forEach(function(error) { %>
+		<li><%- JSON.stringify( flash.err[error]) %></li>
+	<% }) %>
+	</ul>
+	<% } %>
+
+	<div class="control-group">
+		<input type="text" class="form-control" placeholder="Nombre corto" name="nombreCorto">
+	</div>
+	<div class="control-group">	
+		<input type="text" class="form-control" placeholder="Nombre largo" name="nombreLargo">
+	</div>
+	<div class="control-group">	
+		<input type="text" class="form-control" placeholder="Grupo" name="grupo">
+	</div>
+
+	<div class="control-group">	
+		<input type="text" class="form-control" placeholder="Posicion inicial en grupo" name="posicInicial">
+	</div>
+
+	<br />
+
+	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Crear Equipo"/>
+	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>

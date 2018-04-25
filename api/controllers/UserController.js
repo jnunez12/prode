@@ -134,6 +134,22 @@ module.exports = {
 
 			res.redirect('/user');
 		});
+	},
+
+	subscribe: function(req, res) {
+		User.find(function foundUsers(err, users) {
+			if(err) return next(err);
+
+			// subscribe this socket to the User model classroom
+			log.console("user.subscribe");
+			User.subscribe(req.socket);
+			log.console(req.socket);
+
+			// subscribe this socket to the user instance rooms
+			User.subscribe(req.socket, users);
+
+			res.send(200);
+		});
 	}
 	
 };
